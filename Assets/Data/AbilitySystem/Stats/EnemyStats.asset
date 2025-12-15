@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee23d1454cc8cd468cd7403d59fe53f, type: 3}
+  m_Name: EnemyStats
+  m_EditorClassIdentifier: AbilitySystem.Unity::AbilitySystem.Unity.Data.EntityStatsDefinition
+  maxHealth: 300
+  maxMana: 100
+  maxEnergy: 100
+  healthRegen: 1
+  manaRegen: 5
+  attackPower: 15
+  spellPower: 20
+  criticalChance: 0.05
+  criticalDamage: 0.5
+  attackSpeed: 1
+  castSpeed: 1
+  armor: 10
+  magicResist: 10
+  dodgeChance: 0
+  blockChance: 0
+  movementSpeed: 5
+  cooldownReduction: 0
+  fireResist: 0
+  iceResist: 0
+  lightningResist: 0

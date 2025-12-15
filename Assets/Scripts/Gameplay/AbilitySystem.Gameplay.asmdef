@@ -1,3 +1,17 @@
 ﻿{
-  "name": "AbilitySystem.Gameplay"
+    "name": "AbilitySystem.Gameplay",
+    "rootNamespace": "AbilitySystem.Gameplay",
+    "references": [
+        "AbilitySystem.Core",
+        "MessagePipe"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
 }

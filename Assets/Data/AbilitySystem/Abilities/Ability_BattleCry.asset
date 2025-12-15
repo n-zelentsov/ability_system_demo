@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a358fffeac86146b89b6ecadea905a, type: 3}
+  m_Name: Ability_BattleCry
+  m_EditorClassIdentifier: AbilitySystem.Unity::AbilitySystem.Unity.Data.AbilityDefinition
+  abilityId: battle_cry
+  displayName: Battle Cry
+  description: Lets out a battle cry, increasing attack power by 30% for 15 seconds.
+  icon: {fileID: 0}
+  targetingType: 0
+  cooldown: 30
+  castTime: 0
+  canCastWhileMoving: 1
+  isChanneled: 0
+  channelDuration: 0
+  range: 10
+  areaRadius: 0
+  maxCharges: 1
+  chargeRestoreTime: 0
+  resourceCosts:
+  - type: 2
+    amount: 20
+  effects:
+  - {fileID: 11400000, guid: 040ba1e157d3f724999e2aa7ad8835e7, type: 2}

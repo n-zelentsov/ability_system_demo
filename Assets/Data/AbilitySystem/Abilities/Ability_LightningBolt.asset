@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a358fffeac86146b89b6ecadea905a, type: 3}
+  m_Name: Ability_LightningBolt
+  m_EditorClassIdentifier: AbilitySystem.Unity::AbilitySystem.Unity.Data.AbilityDefinition
+  abilityId: lightning_bolt
+  displayName: Lightning Bolt
+  description: Strikes the target with lightning, dealing instant damage.
+  icon: {fileID: 0}
+  targetingType: 1
+  cooldown: 1.5
+  castTime: 0
+  canCastWhileMoving: 1
+  isChanneled: 0
+  channelDuration: 0
+  range: 30
+  areaRadius: 0
+  maxCharges: 1
+  chargeRestoreTime: 0
+  resourceCosts:
+  - type: 1
+    amount: 20
+  effects:
+  - {fileID: 11400000, guid: f39274aefc3a05149b18c2b1230c78ed, type: 2}

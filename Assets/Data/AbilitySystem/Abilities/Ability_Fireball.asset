@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a358fffeac86146b89b6ecadea905a, type: 3}
+  m_Name: Ability_Fireball
+  m_EditorClassIdentifier: AbilitySystem.Unity::AbilitySystem.Unity.Data.AbilityDefinition
+  abilityId: fireball
+  displayName: Fireball
+  description: Hurls a ball of fire at the target, dealing fire damage and applying
+    Ignite.
+  icon: {fileID: 0}
+  targetingType: 1
+  cooldown: 3
+  castTime: 0.5
+  canCastWhileMoving: 1
+  isChanneled: 0
+  channelDuration: 0
+  range: 25
+  areaRadius: 0
+  maxCharges: 1
+  chargeRestoreTime: 0
+  resourceCosts:
+  - type: 1
+    amount: 30
+  effects:
+  - {fileID: 11400000, guid: 82c8f532f2185524f89d35dfe6efd3b2, type: 2}
+  - {fileID: 11400000, guid: 5e27fc5caf809cf4caa3a340568fa320, type: 2}

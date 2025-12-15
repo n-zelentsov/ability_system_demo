@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee23d1454cc8cd468cd7403d59fe53f, type: 3}
+  m_Name: BossStats
+  m_EditorClassIdentifier: AbilitySystem.Unity::AbilitySystem.Unity.Data.EntityStatsDefinition
+  maxHealth: 2000
+  maxMana: 500
+  maxEnergy: 100
+  healthRegen: 5
+  manaRegen: 15
+  attackPower: 40
+  spellPower: 60
+  criticalChance: 0.2
+  criticalDamage: 1
+  attackSpeed: 1
+  castSpeed: 1
+  armor: 50
+  magicResist: 40
+  dodgeChance: 0
+  blockChance: 0
+  movementSpeed: 5
+  cooldownReduction: 0
+  fireResist: 25
+  iceResist: 25
+  lightningResist: 0

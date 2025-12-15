@@ -1,3 +1,23 @@
-﻿{
-  "name": "AbilitySystem.Unity"
+{
+    "name": "AbilitySystem.Unity",
+    "rootNamespace": "AbilitySystem.Unity",
+    "references": [
+        "AbilitySystem.Core",
+        "AbilitySystem.Gameplay",
+        "Unity.InputSystem",
+        "VContainer",
+        "UniRx",
+        "MessagePipe",
+        "MessagePipe.VContainer",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
