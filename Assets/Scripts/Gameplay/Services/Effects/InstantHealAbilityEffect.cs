@@ -35,7 +35,10 @@ namespace AbilitySystem.Gameplay.Services.Effects
             _random = new Random();
         }
 
-        public bool CanApply(AbilityEffectContext context) => context.Target != null && context.Target.IsAlive;
+        public bool CanApply(AbilityEffectContext context)
+        {
+            return context.Target is {IsAlive: true};
+        }
 
         public AbilityEffectResult Apply(AbilityEffectContext context)
         {

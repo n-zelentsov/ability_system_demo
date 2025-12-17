@@ -20,11 +20,11 @@ namespace AbilitySystem.Unity.Factories
 
         public IAbility CreateAbility(AbilityDefinition definition)
         {
-            var effects = new List<IAbilityEffect>();
+            List<IAbilityEffect> effects = new List<IAbilityEffect>();
             
             if (definition.Effects != null)
             {
-                foreach (var effectDef in definition.Effects)
+                foreach (EffectDefinition effectDef in definition.Effects)
                 {
                     if (effectDef != null)
                     {
@@ -75,5 +75,7 @@ namespace AbilitySystem.Unity.Factories
         }
     }
 }
+
+
 
 

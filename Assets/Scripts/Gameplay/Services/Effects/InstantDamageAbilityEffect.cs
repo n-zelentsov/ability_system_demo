@@ -57,10 +57,9 @@ namespace AbilitySystem.Gameplay.Services.Effects
             if (isCritical)
                 damage *= 1f + context.Source.GetStat(EntityStatType.CriticalDamage);
 
-            ElementalReaction reaction = null;
             if (_elementalSystem != null)
             {
-                reaction = _elementalSystem.CheckReaction(context.Target, DamageType);
+                ElementalReaction reaction = _elementalSystem.CheckReaction(context.Target, DamageType);
                 if (reaction.Type != ElementalReactionType.None)
                 {
                     damage *= reaction.DamageMultiplier;

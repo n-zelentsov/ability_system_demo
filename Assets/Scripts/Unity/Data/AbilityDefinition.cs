@@ -61,7 +61,7 @@ namespace AbilitySystem.Unity.Data
 
         public AbilityData ToAbilityData()
         {
-            var costs = new AbilityCost[resourceCosts?.Length ?? 0];
+            AbilityCost[] costs = new AbilityCost[resourceCosts?.Length ?? 0];
             for (int i = 0; i < costs.Length; i++)
             {
                 costs[i] = resourceCosts[i].ToResourceCost();
@@ -96,5 +96,7 @@ namespace AbilitySystem.Unity.Data
         public AbilityCost ToResourceCost() => new AbilityCost(type, amount);
     }
 }
+
+
 
 

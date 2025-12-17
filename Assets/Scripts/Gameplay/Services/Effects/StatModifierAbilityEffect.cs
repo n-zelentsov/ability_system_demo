@@ -11,7 +11,7 @@ namespace AbilitySystem.Gameplay.Services.Effects
     {
         private float _remainingTime;
         private int _currentStacks;
-        private StatModifier _appliedModifier;
+        private StatModifierAbility _appliedModifierAbility;
 
         public string Id { get; }
         public string Name { get; }
@@ -87,65 +87,23 @@ namespace AbilitySystem.Gameplay.Services.Effects
 
         public void OnApply(IEffectTarget target)
         {
-            _appliedModifier = new StatModifier(
+            _appliedModifierAbility = new StatModifierAbility(
                 $"{Id}_{target.Id}",
                 Id,
                 TargetStatId,
                 DamageModifierType,
                 ModifierValue * _currentStacks);
             
-            target.ApplyModifier(_appliedModifier);
+            target.ApplyModifier(_appliedModifierAbility);
         }
 
         public void OnRemove(IEffectTarget target)
         {
-            if (_appliedModifier != null)
+            if (_appliedModifierAbility != null)
             {
-                target.RemoveModifier(_appliedModifier);
-                _appliedModifier = null;
+                target.RemoveModifier(_appliedModifierAbility);
+                _appliedModifierAbility = null;
             }
-        }
-    }
-
-    /// <summary>
-    /// Concrete stat modifier implementation
-    /// </summary>
-    public sealed class StatModifier : IModifier
-    {
-        public string Id { get; }
-        public string SourceId { get; }
-        public string TargetStatId { get; }
-        public DamageModifierType Type { get; }
-        public float Value { get; }
-        public int Priority { get; }
-        public bool IsExpired => false; // Managed by effect
-
-        public StatModifier(
-            string id,
-            string sourceId,
-            string targetStatId,
-            DamageModifierType type,
-            float value,
-            int priority = 0)
-        {
-            Id = id;
-            SourceId = sourceId;
-            TargetStatId = targetStatId;
-            Type = type;
-            Value = value;
-            Priority = priority;
-        }
-
-        public float Apply(float baseValue, float currentValue)
-        {
-            return Type switch
-            {
-                DamageModifierType.Flat => currentValue + Value,
-                DamageModifierType.PercentAdd => currentValue + (baseValue * Value),
-                DamageModifierType.PercentMultiply => currentValue * (1 + Value),
-                DamageModifierType.Override => Value,
-                _ => currentValue
-            };
         }
     }
 }

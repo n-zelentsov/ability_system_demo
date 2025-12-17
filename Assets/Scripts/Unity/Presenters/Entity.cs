@@ -54,7 +54,9 @@ namespace AbilitySystem.Unity.Presenters
         private void Awake()
         {
             if (string.IsNullOrEmpty(entityId))
+            {
                 entityId = Guid.NewGuid().ToString();
+            }
         }
 
         [Inject]
@@ -66,12 +68,18 @@ namespace AbilitySystem.Unity.Presenters
 
         private void Start()
         {
-            if (!_initialized) Initialize();
+            if (!_initialized)
+            {
+                Initialize();
+            }
         }
 
         private void Initialize()
         {
-            if (_initialized) return;
+            if (_initialized)
+            {
+                return;
+            }
             _initialized = true;
             
             InitializeStats();
@@ -81,7 +89,10 @@ namespace AbilitySystem.Unity.Presenters
 
         private void InitializeStats()
         {
-            if (statsDefinition == null) return;
+            if (statsDefinition == null)
+            {
+                return;
+            }
 
             _entityStats.RegisterStat(EntityStatType.MaxHealth, statsDefinition.MaxHealth, 0);
             _entityStats.RegisterStat(EntityStatType.MaxMana, statsDefinition.MaxMana, 0);
@@ -102,19 +113,25 @@ namespace AbilitySystem.Unity.Presenters
 
         private void InitializeResources()
         {
-            if (statsDefinition == null) return;
+            if (statsDefinition == null)
+            {
+                return;
+            }
 
-            var health = new AbilityCostPool(AbilityCostType.Health, statsDefinition.MaxHealth);
+            AbilityCostPool health = new AbilityCostPool(AbilityCostType.Health, statsDefinition.MaxHealth);
             health.RegenRate = statsDefinition.HealthRegen;
             health.OnValueChanged += (old, current, max) => 
             {
                 _health.Value = current;
-                if (current <= 0 && _isAlive) Die(null);
+                if (current <= 0 && _isAlive)
+                {
+                    Die(null);
+                }
             };
             _resources[AbilityCostType.Health] = health;
             _health.Value = health.CurrentValue;
 
-            var mana = new AbilityCostPool(AbilityCostType.Mana, statsDefinition.MaxMana);
+            AbilityCostPool mana = new AbilityCostPool(AbilityCostType.Mana, statsDefinition.MaxMana);
             mana.RegenRate = statsDefinition.ManaRegen;
             mana.OnValueChanged += (_, current, __) => _mana.Value = current;
             _resources[AbilityCostType.Mana] = mana;
@@ -125,9 +142,18 @@ namespace AbilitySystem.Unity.Presenters
 
         private void InitializeAbilities()
         {
-            if (startingAbilities == null || _abilityFactory == null) return;
-            foreach (var def in startingAbilities)
-                if (def != null) _abilities.Add(_abilityFactory.CreateAbility(def));
+            if (startingAbilities == null || _abilityFactory == null)
+            {
+                return;
+            }
+
+            foreach (AbilityDefinition def in startingAbilities)
+            {
+                if (def != null)
+                {
+                    _abilities.Add(_abilityFactory.CreateAbility(def));
+                }
+            }
         }
 
         private void Update()
@@ -135,29 +161,43 @@ namespace AbilitySystem.Unity.Presenters
             // Don't regen if dead!
             if (_isAlive)
             {
-                foreach (var resource in _resources.Values) 
+                foreach (AbilityCostPool resource in _resources.Values)
+                {
                     resource.Tick(Time.deltaTime);
+                }
             }
             _entityStats.ClearExpiredModifiers();
         }
 
-        public bool HasResource(AbilityCostType type, float amount) =>
-            _resources.TryGetValue(type, out var pool) && pool.HasEnough(amount);
+        public bool HasResource(AbilityCostType type, float amount)
+        {
+            return _resources.TryGetValue(type, out AbilityCostPool pool) && pool.HasEnough(amount);
+        }
 
         public void ConsumeResource(AbilityCostType type, float amount)
         {
-            if (_resources.TryGetValue(type, out var pool)) pool.Consume(amount);
+            if (_resources.TryGetValue(type, out AbilityCostPool pool))
+            {
+                pool.Consume(amount);
+            }
         }
 
-        public float GetResource(AbilityCostType type) =>
-            _resources.TryGetValue(type, out var pool) ? pool.CurrentValue : 0;
+        public float GetResource(AbilityCostType type)
+        {
+            return _resources.TryGetValue(type, out AbilityCostPool pool) ? pool.CurrentValue : 0;
+        }
 
-        public float GetMaxResource(AbilityCostType type) =>
-            _resources.TryGetValue(type, out var pool) ? pool.MaxValue : 0;
+        public float GetMaxResource(AbilityCostType type)
+        {
+            return _resources.TryGetValue(type, out AbilityCostPool pool) ? pool.MaxValue : 0;
+        }
 
         public void ModifyResource(AbilityCostType type, float delta)
         {
-            if (_resources.TryGetValue(type, out var pool)) pool.Modify(delta);
+            if (_resources.TryGetValue(type, out AbilityCostPool pool))
+            {
+                pool.Modify(delta);
+            }
         }
 
         public void AddAbility(IAbility ability)
@@ -176,7 +216,11 @@ namespace AbilitySystem.Unity.Presenters
 
         public void ModifyStat(string statId, float delta)
         {
-            if (statId == EntityStatType.MaxHealth) { ModifyResource(AbilityCostType.Health, delta); return; }
+            if (statId == EntityStatType.MaxHealth)
+            {
+                ModifyResource(AbilityCostType.Health, delta);
+                return;
+            }
             _entityStats.ModifyBaseValue(statId, delta);
         }
 
@@ -186,8 +230,13 @@ namespace AbilitySystem.Unity.Presenters
 
         public bool HasModifier(string modifierId)
         {
-            foreach (var statId in _entityStats.GetAllStatIds())
-                if (_entityStats.GetModifiers(statId).Any(m => m.Id == modifierId)) return true;
+            foreach (string statId in _entityStats.GetAllStatIds())
+            {
+                if (_entityStats.GetModifiers(statId).Any(m => m.Id == modifierId))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -203,8 +252,10 @@ namespace AbilitySystem.Unity.Presenters
         {
             _isAlive = true;
             _alive.Value = true;
-            if (_resources.TryGetValue(AbilityCostType.Health, out var health))
+            if (_resources.TryGetValue(AbilityCostType.Health, out AbilityCostPool health))
+            {
                 health.Restore(health.MaxValue * healthPercent);
+            }
             Debug.Log($"<color=green>✨ {entityName} revived!</color>");
         }
 

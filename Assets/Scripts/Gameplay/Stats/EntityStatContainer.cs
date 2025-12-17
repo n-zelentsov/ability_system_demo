@@ -127,7 +127,7 @@ namespace AbilitySystem.Gameplay.Stats
 
         public float CalculateModifiedValue(string statId, float baseValue)
         {
-            if (!_stats.TryGetValue(statId, out var stat))
+            if (!_stats.TryGetValue(statId, out EntityStat stat))
             {
                 return baseValue;
             }

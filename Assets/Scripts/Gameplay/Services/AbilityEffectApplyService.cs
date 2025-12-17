@@ -42,7 +42,7 @@ namespace AbilitySystem.Gameplay.Services
         {
             string targetId = target.Id;
             
-            if (!_activeEffects.TryGetValue(targetId, out var effects))
+            if (!_activeEffects.TryGetValue(targetId, out List<AbilityActiveEffect> effects))
             {
                 effects = new List<AbilityActiveEffect>();
                 _activeEffects[targetId] = effects;
@@ -111,7 +111,7 @@ namespace AbilitySystem.Gameplay.Services
 
             foreach ((string targetId, AbilityActiveEffect activeEffect) in expiredEffects)
             {
-                if (_activeEffects.TryGetValue(targetId, out var effects))
+                if (_activeEffects.TryGetValue(targetId, out List<AbilityActiveEffect> effects))
                 {
                     effects.Remove(activeEffect);
                     _effectRemovedPublisher.Publish(new AbilityEffectRemovedEvent(null, activeEffect.AbilityEffect));

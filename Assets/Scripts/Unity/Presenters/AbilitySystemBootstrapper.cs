@@ -33,7 +33,7 @@ namespace AbilitySystem.Unity.Presenters
             _abilityCastSystem = abilityCastSystem;
             _abilityFactory = abilityFactory;
 
-            var bag = DisposableBag.CreateBuilder();
+            DisposableBagBuilder bag = DisposableBag.CreateBuilder();
             
             damageSubscriber.Subscribe(OnDamageDealt).AddTo(bag);
             healSubscriber.Subscribe(OnHealingDealt).AddTo(bag);

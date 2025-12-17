@@ -25,7 +25,7 @@ namespace AbilitySystem.Unity.Installers
         protected override void Configure(IContainerBuilder builder)
         {
             // MessagePipe - register all event types
-            var options = builder.RegisterMessagePipe();
+            MessagePipeOptions options = builder.RegisterMessagePipe();
             RegisterEvents(builder, options);
 
             // Core Services
@@ -58,15 +58,17 @@ namespace AbilitySystem.Unity.Installers
                 builder.RegisterBuildCallback(container =>
                 {
                     // Inject into all Entities in scene
-                    foreach (var entity in FindObjectsByType<Entity>(FindObjectsSortMode.None))
+                    foreach (Entity entity in FindObjectsByType<Entity>(FindObjectsSortMode.None))
                     {
                         container.Inject(entity);
                     }
                     
                     // Inject into Bootstrapper
-                    var bootstrapper = FindFirstObjectByType<AbilitySystemBootstrapper>();
+                    AbilitySystemBootstrapper bootstrapper = FindFirstObjectByType<AbilitySystemBootstrapper>();
                     if (bootstrapper != null)
+                    {
                         container.Inject(bootstrapper);
+                    }
                 });
             }
         }

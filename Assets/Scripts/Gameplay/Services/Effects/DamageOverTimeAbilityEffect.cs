@@ -50,7 +50,10 @@ namespace AbilitySystem.Gameplay.Services.Effects
             _currentStacks = 1;
         }
 
-        public bool CanApply(AbilityEffectContext context) => context.Target != null && context.Target.IsAlive;
+        public bool CanApply(AbilityEffectContext context)
+        {
+            return context.Target is {IsAlive: true};
+        }
 
         public AbilityEffectResult Apply(AbilityEffectContext context)
         {
@@ -75,10 +78,33 @@ namespace AbilitySystem.Gameplay.Services.Effects
             }
         }
 
-        public void Refresh() => _remainingTime = Duration;
-        public void AddStack() { if (_currentStacks < MaxStacks) _currentStacks++; }
-        public void RemoveStack() { if (_currentStacks > 0) _currentStacks--; }
-        public void OnApply(IEffectTarget target) { }
-        public void OnRemove(IEffectTarget target) { }
+        public void Refresh()
+        {
+            _remainingTime = Duration;
+        }
+
+        public void AddStack()
+        {
+            if (_currentStacks < MaxStacks)
+            {
+                _currentStacks++;
+            }
+        }
+
+        public void RemoveStack()
+        {
+            if (_currentStacks > 0)
+            {
+                _currentStacks--;
+            }
+        }
+
+        public void OnApply(IEffectTarget target)
+        {
+        }
+
+        public void OnRemove(IEffectTarget target)
+        {
+        }
     }
 }

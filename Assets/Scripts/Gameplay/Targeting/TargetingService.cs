@@ -32,7 +32,7 @@ namespace AbilitySystem.Gameplay.Targeting
 
         public IReadOnlyList<IEffectTarget> ResolveTargets(TargetingRequest request)
         {
-            if (_strategies.TryGetValue(request.Ability.TargetingType, out var strategy))
+            if (_strategies.TryGetValue(request.Ability.TargetingType, out ITargetingStrategy strategy))
             {
                 return strategy.FindTargets(request);
             }
@@ -42,7 +42,7 @@ namespace AbilitySystem.Gameplay.Targeting
 
         public bool ValidateTarget(IEffectTarget target, TargetingRequest request)
         {
-            if (_strategies.TryGetValue(request.Ability.TargetingType, out var strategy))
+            if (_strategies.TryGetValue(request.Ability.TargetingType, out ITargetingStrategy strategy))
             {
                 return strategy.IsValidTarget(target, request);
             }
@@ -83,18 +83,20 @@ namespace AbilitySystem.Gameplay.Targeting
         public bool IsValidTarget(IEffectTarget target, TargetingRequest request)
         {
             if (!request.Filter.Passes(target, request.Caster))
+            {
                 return false;
+            }
 
             // Check range
-            var distance = CalculateDistance(request.Caster.Position, target.Position);
+            float distance = CalculateDistance(request.Caster.Position, target.Position);
             return distance <= request.Ability.Data.Range;
         }
 
         private static float CalculateDistance((float x, float y, float z) a, (float x, float y, float z) b)
         {
-            var dx = a.x - b.x;
-            var dy = a.y - b.y;
-            var dz = a.z - b.z;
+            float dx = a.x - b.x;
+            float dy = a.y - b.y;
+            float dz = a.z - b.z;
             return (float)Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
     }
@@ -112,10 +114,10 @@ namespace AbilitySystem.Gameplay.Targeting
 
         public IReadOnlyList<IEffectTarget> FindTargets(TargetingRequest request)
         {
-            var center = request.TargetPoint ?? request.Caster.Position;
-            var radius = request.Ability.Data.AreaRadius;
+            (float x, float y, float z) center = request.TargetPoint ?? request.Caster.Position;
+            float radius = request.Ability.Data.AreaRadius;
 
-            var targetsInRadius = _targetProvider.GetTargetsInRadius(center, radius);
+            IEnumerable<IEffectTarget> targetsInRadius = _targetProvider.GetTargetsInRadius(center, radius);
             
             return targetsInRadius
                 .Where(t => request.Filter.Passes(t, request.Caster))
@@ -144,5 +146,7 @@ namespace AbilitySystem.Gameplay.Targeting
         }
     }
 }
+
+
 
 

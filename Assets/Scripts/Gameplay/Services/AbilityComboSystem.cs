@@ -41,7 +41,7 @@ namespace AbilitySystem.Gameplay.Services
         public void RegisterAbilityCast(IAbilityOwner caster, AbilityId abilityId)
         {
             string casterId = caster.Id;
-            if (_activeTrackers.TryGetValue(casterId, out var tracker))
+            if (_activeTrackers.TryGetValue(casterId, out AbilityComboTracker tracker))
             {
                 int nextStep = tracker.CurrentStep + 1;
                 if (nextStep < tracker.Combo.Sequence.Length && 
